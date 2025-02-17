@@ -8,10 +8,12 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            url: '/contacts/getall'
+            url: '/contacts/getcontactswithcompanyandcountry'
         },
         "columns": [
             { data: 'contactName', "width": "30%" },
+            { data: 'company.companyName', "width": "20%" },
+            { data: 'country.countryName', "width": "20%" },
             {
                 data: 'contactId',
                 "render": function (data) {
@@ -45,7 +47,7 @@ function Delete(url) {
                 type: 'DELETE',
                 success: function (data) {
                     console.log("Response from server:", data);
-                    if (data.success) { 
+                    if (data.success) {
                         dataTable.ajax.reload(); // Reload DataTable
                         toastr.success(data.message); // Show success message
                     } else {
@@ -62,4 +64,5 @@ function Delete(url) {
         }
     });
 }
+
 

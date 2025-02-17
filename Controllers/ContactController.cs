@@ -96,6 +96,15 @@ namespace BasicWebAPI.Controllers
             return Json(new { success = true, message = "Delete Successful " });
 
         }
+
+        [HttpGet("/contacts/getcontactswithcompanyandcountry")]
+        public IActionResult GetContactsWithCompanyAndCountry()
+        {
+            List<Contact> contacts = unitOfWork.Contact.GetAll(includeProperties: "Company,Country").ToList();
+
+            return Json(new { data = contacts });
+        }
+
         #endregion
 
     }

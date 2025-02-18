@@ -1,111 +1,97 @@
-﻿using BasicWebAPI.Data;
-using BasicWebAPI.Models;
-using BasicWebAPI.Repository;
+﻿using Microsoft.AspNetCore.Mvc;
 using BasicWebAPI.Repository.IRepository;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using BasicWebAPI.Models;
 
 namespace BasicWebAPI.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class ContactController : Controller
+    public class ContactController : ControllerBase 
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ContactController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
-        {
-            List<Contact> ContactList = unitOfWork.Contact.GetAll().ToList();
-
-            return View(ContactList);
-        }
-
-        [HttpGet("upsert/{id?}")]
-        public IActionResult Upsert(int? id)
-        {
-
-            if (id == null || id == 0)
-            {
-                //create
-                return View(new Contact());
-            }
-            else
-            {
-                //update
-                Contact ContactObj = unitOfWork.Contact.Get(u => u.ContactId == id);
-                return View(ContactObj);
-            }
-
-        }
-
-        [HttpPost("upsert/{id?}")]
-        public IActionResult Upsert(Contact ContactObj)
-        {
-            if (ModelState.IsValid)
-            {
-                if (ContactObj.ContactId == 0)
-                {
-                    unitOfWork.Contact.Add(ContactObj);
-                }
-                else
-                {
-
-                    unitOfWork.Contact.Update(ContactObj);
-                }
-
-                unitOfWork.Save();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(ContactObj);
-            }
-
-        }
-
-        #region API CALLS
-        [HttpGet("getall")]
+        
+        [HttpGet]
         public IActionResult GetAllContacts()
         {
-            List<Contact> objContactList = unitOfWork.Contact.GetAll().ToList();
-            return Json(new { data = objContactList });
+            List<Contact> contacts = _unitOfWork.Contact.GetAll().ToList();
+            return Ok(contacts);
         }
 
-        [HttpDelete]
-        [Route("delete/{id}")]
-        public IActionResult Delete(int? id)
+        
+        [HttpGet("{id}")]
+        public IActionResult GetContactById(int id)
         {
-            Console.WriteLine(id);
-
-            var ContactToBeDeleted = unitOfWork.Contact.Get(u => u.ContactId == id);
-
-            
-            if (ContactToBeDeleted == null)
+            var contact = _unitOfWork.Contact.Get(u => u.ContactId == id);
+            if (contact == null)
             {
-                return Json(new { success = false, message = "Error while deleting" });
+                return NotFound(new { message = "Contact not found" });
+            }
+            return Ok(contact);
+        }
+
+        [HttpPost]
+        public IActionResult CreateContact([FromBody] Contact contact)
+        {
+            if (contact == null || string.IsNullOrWhiteSpace(contact.ContactName))
+            {
+                return BadRequest(new { message = "Invalid contact data" });
             }
 
-            unitOfWork.Contact.Remove(ContactToBeDeleted);
-            unitOfWork.Save();
-            return Json(new { success = true, message = "Delete Successful " });
-
+            _unitOfWork.Contact.Add(contact);
+            _unitOfWork.Save();
+            return CreatedAtAction(nameof(GetContactById), new { id = contact.ContactId }, contact);
         }
 
-        [HttpGet("/contacts/getcontactswithcompanyandcountry")]
+        [HttpPut("{id}")]
+        public IActionResult UpdateContact(int id, [FromBody] Contact contact)
+        {
+            if (contact == null)
+            {
+                return BadRequest(new { message = "Request body is missing" });
+            }
+
+            if (id != contact.ContactId)
+            {
+                return BadRequest(new { message = $"ID mismatch: URL ID ({id}) does not match body ID ({contact.ContactId})" });
+            }
+
+            var existingContact = _unitOfWork.Contact.Get(u => u.ContactId == id);
+            if (existingContact == null)
+            {
+                return NotFound(new { message = "Contact not found" });
+            }
+
+            _unitOfWork.Contact.Update(contact);
+            _unitOfWork.Save();
+            return Ok(new { message = "Contact updated successfully" });
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteContact(int id)
+        {
+            var contactToDelete = _unitOfWork.Contact.Get(u => u.ContactId == id);
+            if (contactToDelete == null)
+            {
+                return NotFound(new { message = "Contact not found" });
+            }
+
+            _unitOfWork.Contact.Remove(contactToDelete);
+            _unitOfWork.Save();
+            return Ok(new { message = "Contact deleted successfully" });
+        }
+
+        [HttpGet("withcompanyandcountry")]
         public IActionResult GetContactsWithCompanyAndCountry()
         {
-            List<Contact> contacts = unitOfWork.Contact.GetAll(includeProperties: "Company,Country").ToList();
-
-            return Json(new { data = contacts });
+            var contacts = _unitOfWork.Contact.GetAll(includeProperties: "Company,Country").ToList();
+            return Ok(contacts);
         }
-
-        #endregion
-
     }
 }

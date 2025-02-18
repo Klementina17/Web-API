@@ -1,102 +1,82 @@
-﻿using BasicWebAPI.Data;
-using BasicWebAPI.Models;
-using BasicWebAPI.Repository;
+﻿using BasicWebAPI.Models;
 using BasicWebAPI.Repository.IRepository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BasicWebAPI.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class CompanyController : Controller
+    public class CompanyController : ControllerBase 
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CompanyController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
-        {
-            List<Company> CompanyList = unitOfWork.Company.GetAll().ToList();
-
-            return View(CompanyList);
-        }
-
-        [HttpGet("upsert/{id?}")]
-        public IActionResult Upsert(int? id)
-        {
-
-            if (id == null || id == 0)
-            {
-                //create
-                return View(new Company());
-            }
-            else
-            {
-                //update
-                Company companyObj = unitOfWork.Company.Get(u => u.CompanyId == id);
-                return View(companyObj);
-            }
-
-        }
-
-        [HttpPost("upsert/{id?}")]
-        public IActionResult Upsert(Company CompanyObj)
-        {
-            if (ModelState.IsValid)
-            {
-                if (CompanyObj.CompanyId == 0)
-                {
-                    unitOfWork.Company.Add(CompanyObj);
-                }
-                else
-                {
-
-                    unitOfWork.Company.Update(CompanyObj);
-                }
-
-                unitOfWork.Save();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(CompanyObj);
-            }
-
-        }
-
-        #region API CALLS
-        [HttpGet("getall")]
+        [HttpGet]
         public IActionResult GetAllCompanies()
         {
-            List<Company> objCompanyList = unitOfWork.Company.GetAll().ToList();
-            return Json(new { data = objCompanyList });
+            List<Company> companyList = _unitOfWork.Company.GetAll().ToList();
+            return Ok(companyList); 
         }
 
-        [HttpDelete]
-        [Route("delete/{id}")]
-        public IActionResult Delete(int? id)
+        [HttpGet("{id}")]
+        public IActionResult GetCompany(int id)
         {
-            Console.WriteLine(id);
-
-            var companyToBeDeleted = unitOfWork.Company.Get(u => u.CompanyId == id);
-
-            
-            if (companyToBeDeleted == null)
+            var company = _unitOfWork.Company.Get(u => u.CompanyId == id);
+            if (company == null)
             {
-                return Json(new { success = false, message = "Error while deleting" });
+                return NotFound(new { message = "Company not found" });
+            }
+            return Ok(company);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCompany([FromBody] Company company)
+        {
+            if (company == null)
+            {
+                return BadRequest(new { message = "Invalid company data" });
             }
 
-            unitOfWork.Company.Remove(companyToBeDeleted);
-            unitOfWork.Save();
-            return Json(new { success = true, message = "Delete Successful " });
-
+            _unitOfWork.Company.Add(company);
+            _unitOfWork.Save();
+            return CreatedAtAction(nameof(GetCompany), new { id = company.CompanyId }, company);
         }
-        #endregion
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateCompany(int id, [FromBody] Company company)
+        {
+            if (company == null || id != company.CompanyId)
+            {
+                return BadRequest(new { message = "Invalid company data" });
+            }
+
+            var existingCompany = _unitOfWork.Company.Get(u => u.CompanyId == id);
+            if (existingCompany == null)
+            {
+                return NotFound(new { message = "Company not found" });
+            }
+
+            _unitOfWork.Company.Update(company);
+            _unitOfWork.Save();
+            return Ok(new { message = "Company updated successfully" });
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCompany(int id)
+        {
+            var companyToDelete = _unitOfWork.Company.Get(u => u.CompanyId == id);
+            if (companyToDelete == null)
+            {
+                return NotFound(new { message = "Company not found" });
+            }
+
+            _unitOfWork.Company.Remove(companyToDelete);
+            _unitOfWork.Save();
+            return Ok(new { message = "Company deleted successfully" });
+        }
     }
 }

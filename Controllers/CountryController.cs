@@ -1,102 +1,82 @@
-﻿using BasicWebAPI.Data;
-using BasicWebAPI.Models;
-using BasicWebAPI.Repository;
+﻿using Microsoft.AspNetCore.Mvc;
 using BasicWebAPI.Repository.IRepository;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using BasicWebAPI.Models;
 
 namespace BasicWebAPI.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class CountryController : Controller
+    public class CountryController : ControllerBase 
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CountryController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
-        {
-            List<Country> CountryList = unitOfWork.Country.GetAll().ToList();
-
-            return View(CountryList);
-        }
-
-        [HttpGet("upsert/{id?}")]
-        public IActionResult Upsert(int? id)
-        {
-
-            if (id == null || id == 0)
-            {
-                //create
-                return View(new Country());
-            }
-            else
-            {
-                //update
-                Country countryObj = unitOfWork.Country.Get(u => u.CountryId == id);
-                return View(countryObj);
-            }
-
-        }
-
-        [HttpPost("upsert/{id?}")]
-        public IActionResult Upsert(Country CountryObj)
-        {
-            if (ModelState.IsValid)
-            {
-                if (CountryObj.CountryId == 0)
-                {
-                    unitOfWork.Country.Add(CountryObj);
-                }
-                else
-                {
-
-                    unitOfWork.Country.Update(CountryObj);
-                }
-
-                unitOfWork.Save();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(CountryObj);
-            }
-
-        }
-
-        #region API CALLS
-        [HttpGet("getall")]
+        [HttpGet]
         public IActionResult GetAllCountries()
         {
-            List<Country> objCountryList = unitOfWork.Country.GetAll().ToList();
-            return Json(new { data = objCountryList });
+            List<Country> countries = _unitOfWork.Country.GetAll().ToList();
+            return Ok(countries);
         }
 
-        [HttpDelete]
-        [Route("delete/{id}")]
-        public IActionResult Delete(int? id)
+        [HttpGet("{id}")]
+        public IActionResult GetCountryById(int id)
         {
-            Console.WriteLine(id);
-
-            var CountryToBeDeleted = unitOfWork.Country.Get(u => u.CountryId == id);
-
-
-            if (CountryToBeDeleted == null)
+            var country = _unitOfWork.Country.Get(u => u.CountryId == id);
+            if (country == null)
             {
-                return Json(new { success = false, message = "Error while deleting" });
+                return NotFound(new { message = "Country not found" });
+            }
+            return Ok(country);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCountry([FromBody] Country country)
+        {
+            if (country == null)
+            {
+                return BadRequest(new { message = "Invalid country data" });
             }
 
-            unitOfWork.Country.Remove(CountryToBeDeleted);
-            unitOfWork.Save();
-            return Json(new { success = true, message = "Delete Successful " });
-
+            _unitOfWork.Country.Add(country);
+            _unitOfWork.Save();
+            return CreatedAtAction(nameof(GetCountryById), new { id = country.CountryId }, country);
         }
-        #endregion
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateCountry(int id, [FromBody] Country country)
+        {
+            if (country == null || id != country.CountryId)
+            {
+                return BadRequest(new { message = "Invalid country data" });
+            }
+
+            var existingCountry = _unitOfWork.Country.Get(u => u.CountryId == id);
+            if (existingCountry == null)
+            {
+                return NotFound(new { message = "Country not found" });
+            }
+
+            _unitOfWork.Country.Update(country);
+            _unitOfWork.Save();
+            return Ok(new { message = "Country updated successfully" });
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCountry(int id)
+        {
+            var countryToDelete = _unitOfWork.Country.Get(u => u.CountryId == id);
+            if (countryToDelete == null)
+            {
+                return NotFound(new { message = "Country not found" });
+            }
+
+            _unitOfWork.Country.Remove(countryToDelete);
+            _unitOfWork.Save();
+            return Ok(new { message = "Country deleted successfully" });
+        }
     }
 }

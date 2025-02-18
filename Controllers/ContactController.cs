@@ -93,5 +93,21 @@ namespace BasicWebAPI.Controllers
             var contacts = _unitOfWork.Contact.GetAll(includeProperties: "Company,Country").ToList();
             return Ok(contacts);
         }
+
+        [HttpGet("FilterContacts")]
+        public IActionResult FilterContacts(int countryId, int companyId)
+        {
+            List<Contact> contacts = _unitOfWork.Contact
+                .GetAll(c => (countryId==0 || c.CountryId == countryId) &&
+                            (companyId==0 || c.CompanyId == companyId))
+                .ToList();
+
+            if (contacts.Count == 0)
+            {
+                return NotFound("No contacts found with the given filters.");
+            }
+
+            return Ok(contacts);
+        }
     }
 }

@@ -24,3 +24,150 @@ FROM [Companies] AS [c]
 2025-02-19 14:39:15.729 +01:00 [INF] Executed action BasicWebAPI.Controllers.CompanyController.GetAllCompanies (BasicWebAPI) in 3332.5728ms
 2025-02-19 14:39:15.733 +01:00 [INF] Executed endpoint 'BasicWebAPI.Controllers.CompanyController.GetAllCompanies (BasicWebAPI)'
 2025-02-19 14:39:15.751 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/Company - 200 null application/json; charset=utf-8 3462.7063ms
+2025-02-19 14:44:54.888 +01:00 [INF] Now listening on: https://localhost:7148
+2025-02-19 14:44:54.925 +01:00 [INF] Now listening on: http://localhost:5062
+2025-02-19 14:44:55.000 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-02-19 14:44:55.001 +01:00 [INF] Hosting environment: Development
+2025-02-19 14:44:55.003 +01:00 [INF] Content root path: C:\Users\pc\OneDrive\Desktop\New folder\Web-API
+2025-02-19 14:44:55.660 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/index.html - null null
+2025-02-19 14:44:55.897 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/index.html - 200 null text/html;charset=utf-8 245.1428ms
+2025-02-19 14:44:55.906 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/index.js - null null
+2025-02-19 14:44:55.906 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - null null
+2025-02-19 14:44:55.920 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/index.js - 200 null application/javascript;charset=utf-8 13.7682ms
+2025-02-19 14:44:55.906 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_vs/browserLink - null null
+2025-02-19 14:44:55.936 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 29.1684ms
+2025-02-19 14:44:55.991 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_vs/browserLink - 200 null text/javascript; charset=UTF-8 84.6487ms
+2025-02-19 14:44:56.026 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - null null
+2025-02-19 14:44:56.053 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 27.9874ms
+2025-02-19 14:45:06.152 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/Contact/1 - null null
+2025-02-19 14:45:06.182 +01:00 [INF] Executing endpoint 'BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI)'
+2025-02-19 14:45:06.217 +01:00 [INF] Route matched with {action = "GetContactById", controller = "Contact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetContactById(Int32) on controller BasicWebAPI.Controllers.ContactController (BasicWebAPI).
+2025-02-19 14:45:07.164 +01:00 [INF] Fetching contact with the ID 1
+2025-02-19 14:45:07.917 +01:00 [INF] Executed DbCommand (53ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[ContactId], [c].[CompanyId], [c].[ContactName], [c].[CountryId]
+FROM [Contacts] AS [c]
+WHERE [c].[ContactId] = @__id_0
+2025-02-19 14:45:07.953 +01:00 [INF] Executing OkObjectResult, writing value of type 'BasicWebAPI.Models.Contact'.
+2025-02-19 14:45:07.964 +01:00 [INF] Executed action BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI) in 1739.4454ms
+2025-02-19 14:45:07.965 +01:00 [INF] Executed endpoint 'BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI)'
+2025-02-19 14:45:07.972 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/Contact/1 - 200 null application/json; charset=utf-8 1820.5928ms
+2025-02-19 14:45:16.706 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/Contact/2 - null null
+2025-02-19 14:45:16.712 +01:00 [INF] Executing endpoint 'BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI)'
+2025-02-19 14:45:16.713 +01:00 [INF] Route matched with {action = "GetContactById", controller = "Contact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetContactById(Int32) on controller BasicWebAPI.Controllers.ContactController (BasicWebAPI).
+2025-02-19 14:45:16.762 +01:00 [INF] Fetching contact with the ID 2
+2025-02-19 14:45:16.772 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[ContactId], [c].[CompanyId], [c].[ContactName], [c].[CountryId]
+FROM [Contacts] AS [c]
+WHERE [c].[ContactId] = @__id_0
+2025-02-19 14:45:16.776 +01:00 [INF] Executing OkObjectResult, writing value of type 'BasicWebAPI.Models.Contact'.
+2025-02-19 14:45:16.777 +01:00 [INF] Executed action BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI) in 62.3369ms
+2025-02-19 14:45:16.779 +01:00 [INF] Executed endpoint 'BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI)'
+2025-02-19 14:45:16.780 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/Contact/2 - 200 null application/json; charset=utf-8 74.0009ms
+2025-02-19 14:45:21.522 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/Contact/3 - null null
+2025-02-19 14:45:21.529 +01:00 [INF] Executing endpoint 'BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI)'
+2025-02-19 14:45:21.532 +01:00 [INF] Route matched with {action = "GetContactById", controller = "Contact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetContactById(Int32) on controller BasicWebAPI.Controllers.ContactController (BasicWebAPI).
+2025-02-19 14:45:21.551 +01:00 [INF] Fetching contact with the ID 3
+2025-02-19 14:45:21.559 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[ContactId], [c].[CompanyId], [c].[ContactName], [c].[CountryId]
+FROM [Contacts] AS [c]
+WHERE [c].[ContactId] = @__id_0
+2025-02-19 14:45:21.561 +01:00 [WRN] Contact with ID 3 not found.
+2025-02-19 14:45:21.564 +01:00 [INF] Executing NotFoundObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-19 14:45:21.568 +01:00 [INF] Executed action BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI) in 31.1239ms
+2025-02-19 14:45:21.569 +01:00 [INF] Executed endpoint 'BasicWebAPI.Controllers.ContactController.GetContactById (BasicWebAPI)'
+2025-02-19 14:45:21.571 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/Contact/3 - 404 null application/json; charset=utf-8 49.5592ms
+2025-02-19 14:51:25.709 +01:00 [INF] Now listening on: https://localhost:7148
+2025-02-19 14:51:25.748 +01:00 [INF] Now listening on: http://localhost:5062
+2025-02-19 14:51:25.824 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-02-19 14:51:25.826 +01:00 [INF] Hosting environment: Development
+2025-02-19 14:51:25.826 +01:00 [INF] Content root path: C:\Users\pc\OneDrive\Desktop\New folder\Web-API
+2025-02-19 14:51:26.627 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/index.html - null null
+2025-02-19 14:51:26.822 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/index.html - 200 null text/html;charset=utf-8 206.875ms
+2025-02-19 14:51:26.833 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/index.js - null null
+2025-02-19 14:51:26.836 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - null null
+2025-02-19 14:51:26.845 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/index.js - 200 null application/javascript;charset=utf-8 11.7183ms
+2025-02-19 14:51:26.836 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_vs/browserLink - null null
+2025-02-19 14:51:26.860 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 23.2725ms
+2025-02-19 14:51:26.900 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_vs/browserLink - 200 null text/javascript; charset=UTF-8 63.536ms
+2025-02-19 14:51:26.944 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - null null
+2025-02-19 14:51:26.975 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 30.7245ms
+2025-02-19 14:51:30.754 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/Company - null null
+2025-02-19 14:51:30.787 +01:00 [INF] Executing endpoint 'BasicWebAPI.Controllers.CompanyController.GetAllCompanies (BasicWebAPI)'
+2025-02-19 14:51:30.812 +01:00 [INF] Route matched with {action = "GetAllCompanies", controller = "Company"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCompanies() on controller BasicWebAPI.Controllers.CompanyController (BasicWebAPI).
+2025-02-19 14:51:31.719 +01:00 [INF] Fetching all companies.
+2025-02-19 14:51:32.826 +01:00 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[CompanyId], [c].[CompanyName]
+FROM [Companies] AS [c]
+2025-02-19 14:51:32.957 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BasicWebAPI.Models.Company, BasicWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-02-19 14:51:32.984 +01:00 [INF] Executed action BasicWebAPI.Controllers.CompanyController.GetAllCompanies (BasicWebAPI) in 2160.0499ms
+2025-02-19 14:51:32.988 +01:00 [INF] Executed endpoint 'BasicWebAPI.Controllers.CompanyController.GetAllCompanies (BasicWebAPI)'
+2025-02-19 14:51:33.007 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/Company - 200 null application/json; charset=utf-8 2253.8156ms
+2025-02-19 14:51:54.825 +01:00 [INF] Now listening on: http://localhost:5062
+2025-02-19 14:51:54.858 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-02-19 14:51:54.859 +01:00 [INF] Hosting environment: Development
+2025-02-19 14:51:54.860 +01:00 [INF] Content root path: C:\Users\pc\OneDrive\Desktop\New folder\Web-API
+2025-02-19 14:52:08.318 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/ - null null
+2025-02-19 14:52:08.452 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/ - 301 0 null 135.0593ms
+2025-02-19 14:52:08.462 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/index.html - null null
+2025-02-19 14:52:08.519 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/index.html - 200 null text/html;charset=utf-8 57.7647ms
+2025-02-19 14:52:08.540 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/swagger-ui.css - null null
+2025-02-19 14:52:08.546 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/index.css - null null
+2025-02-19 14:52:08.547 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/swagger-ui-standalone-preset.js - null null
+2025-02-19 14:52:08.547 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/swagger-ui-bundle.js - null null
+2025-02-19 14:52:08.547 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/index.js - null null
+2025-02-19 14:52:08.557 +01:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-02-19 14:52:08.561 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-02-19 14:52:08.561 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-02-19 14:52:08.567 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/index.js - 200 null application/javascript;charset=utf-8 19.9873ms
+2025-02-19 14:52:08.570 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/index.css - 200 202 text/css 23.5739ms
+2025-02-19 14:52:08.573 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/swagger-ui.css - 200 152035 text/css 32.8488ms
+2025-02-19 14:52:08.573 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/swagger-ui-standalone-preset.js - 200 230007 text/javascript 26.2785ms
+2025-02-19 14:52:08.580 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-02-19 14:52:08.586 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/swagger-ui-bundle.js - 200 1426050 text/javascript 38.8402ms
+2025-02-19 14:52:08.735 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/swagger/v1/swagger.json - null null
+2025-02-19 14:52:08.756 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5062/favicon-32x32.png - null null
+2025-02-19 14:52:08.758 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-02-19 14:52:08.759 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/favicon-32x32.png - 200 628 image/png 3.0981ms
+2025-02-19 14:52:08.838 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5062/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 103.0687ms
+2025-02-19 14:52:33.394 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5062/api/Company - application/json 47
+2025-02-19 14:52:33.410 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-02-19 14:52:33.445 +01:00 [INF] Executing endpoint 'BasicWebAPI.Controllers.CompanyController.CreateCompany (BasicWebAPI)'
+2025-02-19 14:52:33.484 +01:00 [INF] Route matched with {action = "CreateCompany", controller = "Company"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateCompany(BasicWebAPI.Models.Company) on controller BasicWebAPI.Controllers.CompanyController (BasicWebAPI).
+2025-02-19 14:52:35.269 +01:00 [INF] Executed DbCommand (80ms) [Parameters=[@p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Companies] ([CompanyName])
+OUTPUT INSERTED.[CompanyId]
+VALUES (@p0);
+2025-02-19 14:52:35.332 +01:00 [INF] Company created with ID35
+2025-02-19 14:52:35.340 +01:00 [INF] Executing CreatedAtActionResult, writing value of type 'BasicWebAPI.Models.Company'.
+2025-02-19 14:52:35.388 +01:00 [INF] Executed action BasicWebAPI.Controllers.CompanyController.CreateCompany (BasicWebAPI) in 1885.149ms
+2025-02-19 14:52:35.391 +01:00 [INF] Executed endpoint 'BasicWebAPI.Controllers.CompanyController.CreateCompany (BasicWebAPI)'
+2025-02-19 14:52:35.407 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5062/api/Company - 201 null application/json; charset=utf-8 2013.5026ms
+2025-02-19 14:52:51.810 +01:00 [INF] Application is shutting down...
+2025-02-19 14:53:20.087 +01:00 [INF] Now listening on: https://localhost:7148
+2025-02-19 14:53:20.129 +01:00 [INF] Now listening on: http://localhost:5062
+2025-02-19 14:53:20.218 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-02-19 14:53:20.219 +01:00 [INF] Hosting environment: Development
+2025-02-19 14:53:20.220 +01:00 [INF] Content root path: C:\Users\pc\OneDrive\Desktop\New folder\Web-API
+2025-02-19 14:53:21.172 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/index.html - null null
+2025-02-19 14:53:21.407 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/index.html - 200 null text/html;charset=utf-8 243.9929ms
+2025-02-19 14:53:21.426 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/index.js - null null
+2025-02-19 14:53:21.426 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - null null
+2025-02-19 14:53:21.427 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_vs/browserLink - null null
+2025-02-19 14:53:21.433 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/index.js - 200 null application/javascript;charset=utf-8 6.974ms
+2025-02-19 14:53:21.447 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 20.4822ms
+2025-02-19 14:53:21.489 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_vs/browserLink - 200 null text/javascript; charset=UTF-8 61.9518ms
+2025-02-19 14:53:21.525 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - null null
+2025-02-19 14:53:21.566 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 41.4799ms
+2025-02-19 14:53:44.531 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/Country - null null
+2025-02-19 14:53:44.583 +01:00 [INF] Executing endpoint 'BasicWebAPI.Controllers.CountryController.GetAllCountries (BasicWebAPI)'
+2025-02-19 14:53:44.623 +01:00 [INF] Route matched with {action = "GetAllCountries", controller = "Country"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCountries() on controller BasicWebAPI.Controllers.CountryController (BasicWebAPI).
+2025-02-19 14:53:46.287 +01:00 [INF] Fetching all countries.
+2025-02-19 14:53:47.352 +01:00 [INF] Executed DbCommand (68ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[CountryId], [c].[CountryName]
+FROM [Countries] AS [c]
+2025-02-19 14:53:47.477 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BasicWebAPI.Models.Country, BasicWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-02-19 14:53:47.498 +01:00 [INF] Executed action BasicWebAPI.Controllers.CountryController.GetAllCountries (BasicWebAPI) in 2864.5932ms
+2025-02-19 14:53:47.502 +01:00 [INF] Executed endpoint 'BasicWebAPI.Controllers.CountryController.GetAllCountries (BasicWebAPI)'
+2025-02-19 14:53:47.519 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/Country - 200 null application/json; charset=utf-8 2988.2045ms

@@ -9,7 +9,7 @@ using Serilog.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Logging.AddConsole(); 
+builder.Logging.AddConsole();
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -17,9 +17,9 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.WithExceptionDetails()
     .CreateLogger();
 
-builder.Host.UseSerilog(); 
+builder.Host.UseSerilog();
 
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -38,15 +38,7 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-
 app.UseMiddleware<ExceptionMiddleware>();
-
-
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
 
 if (app.Environment.IsDevelopment())
 {
@@ -54,18 +46,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Basic Web API v1");
-        options.RoutePrefix = string.Empty;
+        options.RoutePrefix = string.Empty; 
     });
 }
+else
+{
 
-app.UseSwagger(); 
-app.UseSwaggerUI(); 
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllers();

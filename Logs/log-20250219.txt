@@ -1,0 +1,26 @@
+2025-02-19 14:39:03.358 +01:00 [INF] Now listening on: https://localhost:7148
+2025-02-19 14:39:03.400 +01:00 [INF] Now listening on: http://localhost:5062
+2025-02-19 14:39:03.493 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-02-19 14:39:03.495 +01:00 [INF] Hosting environment: Development
+2025-02-19 14:39:03.496 +01:00 [INF] Content root path: C:\Users\pc\OneDrive\Desktop\New folder\Web-API
+2025-02-19 14:39:04.423 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/index.html - null null
+2025-02-19 14:39:04.720 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/index.html - 200 null text/html;charset=utf-8 307.6568ms
+2025-02-19 14:39:04.728 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - null null
+2025-02-19 14:39:04.728 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/index.js - null null
+2025-02-19 14:39:04.737 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/index.js - 200 null application/javascript;charset=utf-8 9.2048ms
+2025-02-19 14:39:04.739 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_vs/browserLink - null null
+2025-02-19 14:39:04.746 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 19.2972ms
+2025-02-19 14:39:04.785 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_vs/browserLink - 200 null text/javascript; charset=UTF-8 46.1082ms
+2025-02-19 14:39:04.844 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - null null
+2025-02-19 14:39:04.877 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 33.0747ms
+2025-02-19 14:39:12.289 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/Company - null null
+2025-02-19 14:39:12.339 +01:00 [INF] Executing endpoint 'BasicWebAPI.Controllers.CompanyController.GetAllCompanies (BasicWebAPI)'
+2025-02-19 14:39:12.384 +01:00 [INF] Route matched with {action = "GetAllCompanies", controller = "Company"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCompanies() on controller BasicWebAPI.Controllers.CompanyController (BasicWebAPI).
+2025-02-19 14:39:14.295 +01:00 [INF] Fetching all companies.
+2025-02-19 14:39:15.576 +01:00 [INF] Executed DbCommand (61ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[CompanyId], [c].[CompanyName]
+FROM [Companies] AS [c]
+2025-02-19 14:39:15.704 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BasicWebAPI.Models.Company, BasicWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-02-19 14:39:15.729 +01:00 [INF] Executed action BasicWebAPI.Controllers.CompanyController.GetAllCompanies (BasicWebAPI) in 3332.5728ms
+2025-02-19 14:39:15.733 +01:00 [INF] Executed endpoint 'BasicWebAPI.Controllers.CompanyController.GetAllCompanies (BasicWebAPI)'
+2025-02-19 14:39:15.751 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/Company - 200 null application/json; charset=utf-8 3462.7063ms

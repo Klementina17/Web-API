@@ -1,6 +1,7 @@
 ﻿using BasicWebAPI.Data;
 using BasicWebAPI.Models;
 using BasicWebAPI.Repository.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicWebAPI.Repository
 {
@@ -17,5 +18,6 @@ namespace BasicWebAPI.Repository
         {
             _db.Contacts.Update(obj);
         }
+
     }
 }

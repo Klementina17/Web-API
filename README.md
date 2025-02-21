@@ -30,7 +30,6 @@ Before running this project, ensure you have:
 
 •	SQL Server installed and running
 
-
 -Installation & Setup
 
 1.Clone the Repository
@@ -88,11 +87,11 @@ Update appsettings.json with your SQL Server connection string:
 
     GET         /api/contatc/withcompanyandcountry     Retrieves contacts along with their associated company and country details.
    
-
     GET         /api/contact/FilterContacts            Retrieves contacts based on applied filters.
 
 
     * COMPANY ENDPOINTS
+    
     * 
     Method       Endpoint                                Description
 
@@ -108,11 +107,11 @@ Update appsettings.json with your SQL Server connection string:
 
     PUT         /api/company/{id}                      Updates an existing company.
 
-
     DELETE      /api/company/{id}                      Deletes a company by ID.
 
 
 * COUNTRY ENDPOINTS
+
 * 
     Method       Endpoint                                Description
 
@@ -127,7 +126,6 @@ Update appsettings.json with your SQL Server connection string:
 
 
     PUT         /api/country/{id}                      Updates an existing country.
-
 
     DELETE      /api/country/{id}                      Deletes a country by ID.
   
@@ -152,7 +150,6 @@ Update appsettings.json with your SQL Server connection string:
 
  To enable loggind you should write this in your Program.cs:
 
-
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.Console()
@@ -174,18 +171,3 @@ Notes
 The API follows the Repository and Unit of Work patterns for data access.
 
 Docker support is enabled for Windows Containers.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
